@@ -1,14 +1,20 @@
 #!/usr/bin/env python
 
-import json, tweepy, sys
+import json, tweepy, sys, os
 from getopt import *
 
+def horizontalLines(count = 1, ch = '-'):
+  # Get size of console
+  rows, columns = os.popen('stty size', 'r').read().split()
+  print ( ch * int( int(columns) / len(ch) ) + '\n' ) * count,
+
 def printTweets(tweetsList):
-  for message in tweetList: 
+  horizontalLines()
+  for message in tweetsList: 
     print message.user.name + ' - @' + message.user.screen_name
     print message.text
     print '  > ' + str(message.created_at) + ' via ' + message.source
-    print '-'*20 
+    horizontalLines()
 
 def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interactive=False):
   consumer_key = 'C0KI0nXR4BQizZdWYFSBQ'
@@ -63,7 +69,6 @@ def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interact
 
   if home == True:
     print 'Home:'
-    print '-'*20
     printTweets(reversed(api.home_timeline()))
 
 if __name__ == '__main__':
