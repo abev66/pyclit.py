@@ -67,7 +67,7 @@ def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interact
   if tweet is not None:
     api.update_status(tweet)
 
-  if home == True:
+  if home:
     print 'Home:'
     printTweets(reversed(api.home_timeline()))
 
