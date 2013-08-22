@@ -71,6 +71,10 @@ def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interact
     print 'Home:'
     printTweets(reversed(api.home_timeline()))
 
+  if mention:
+    print 'Mentions:'
+    printTweets(reversed(api.mentions_timeline()))
+
 if __name__ == '__main__':
   manual = '''pyclit.py - commandline based lightweight twitter client.
 
@@ -83,7 +87,7 @@ if __name__ == '__main__':
     -i, --interactive           Interactive Mode.
 '''
   try:
-    opts, args = getopt( sys.argv[1:], 'ts:h', [ 'home', 'tweet=', 'help', 'auth' ] )
+    opts, args = getopt( sys.argv[1:], 'ts:hm', [ 'home', 'tweet=', 'help', 'auth', 'mentions' ] )
   except getopt.GetoptError as err:
     print str(err)
     sys.exit(2)
@@ -93,6 +97,7 @@ if __name__ == '__main__':
   auth = False
   tweet = None
   help = False
+  mention = False
   
   for o, a in opts:
     if o in ('-t','--home'):
@@ -103,9 +108,11 @@ if __name__ == '__main__':
       help = True
     elif o == '--auth':
       auth = True
+    elif o in ('-m', '--mentions'):
+      mention = True
 
   if help:
     print manual
     sys.exit(0)
   
-  pyclit(auth, tweet, home)
+  pyclit(auth, tweet, home, mention)
