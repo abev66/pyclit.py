@@ -3,6 +3,13 @@
 import json, tweepy, sys
 from getopt import *
 
+def printTweets(tweetsList):
+  for message in tweetList: 
+    print message.user.name + ' - @' + message.user.screen_name
+    print message.text
+    print '  > ' + str(message.created_at) + ' via ' + message.source
+    print '-'*20 
+
 def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interactive=False):
   consumer_key = 'C0KI0nXR4BQizZdWYFSBQ'
   consumer_secret = 'f6lI5yGxXl8cdYVAO1fdHm69M6vtN5wKM7UCG5b0xY'
@@ -56,13 +63,8 @@ def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interact
 
   if home == True:
     print 'Home:'
-    print '-'*20 
-    for message in reversed(api.home_timeline()):
-      print message.user.name + ' - @' + message.user.screen_name
-      print message.text
-      print '  > ' + str(message.created_at) + ' via ' + message.source
-      print '-'*20 
-
+    print '-'*20
+    printTweets(reversed(api.home_timeline()))
 
 if __name__ == '__main__':
   manual = '''pyclit.py - commandline based lightweight twitter client.
