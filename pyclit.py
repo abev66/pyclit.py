@@ -117,4 +117,8 @@ if __name__ == '__main__':
     print manual
     sys.exit(0)
   
-  pyclit(auth, tweet, home, mention)
+  try:
+    pyclit(auth, tweet, home, mention)
+  except KeyboardInterrupt:
+    sys.exit('Interrupted by user.')
+
