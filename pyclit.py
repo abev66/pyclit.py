@@ -92,8 +92,7 @@ if __name__ == '__main__':
   try:
     opts, args = getopt( sys.argv[1:], 'ts:hm', [ 'home', 'tweet=', 'help', 'auth', 'mentions' ] )
   except GetoptError as err:
-    print str(err)
-    sys.exit(2)
+    sys.exit(str(err))
 
   #Defaults
   home = False
