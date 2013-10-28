@@ -4,6 +4,8 @@
 import json, tweepy, sys, os
 from getopt import *
 
+PYCLITRC_PATH= os.path.expanduser("~/.pyclitrc")
+
 def horizontalLines(count = 1, ch = '-'):
   # Get size of console
   rows, columns = os.popen('stty size', 'r').read().split()
@@ -40,7 +42,7 @@ def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interact
       return
 
     try:
-      fp = open('.pyclitrc', 'w')
+      fp = open(PYCLITRC_PATH, 'w')
       profile = {
         'key': au.access_token.key,
         'secret': au.access_token.secret
@@ -52,7 +54,7 @@ def pyclit(auth=False, tweet=None, home=False, mention=False, dm=False, interact
       return
 
   try:
-    fp = open('.pyclitrc', 'r')
+    fp = open(PYCLITRC_PATH, 'r')
     profile = json.load(fp)
   except IOError:
     print "Cannot open authorized account, please use --auth to login."
